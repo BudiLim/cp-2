@@ -1,26 +1,27 @@
 import ShareButton from "../../c2/share";
-import Wrapper from "../../c2/wrapper"
+import Wrapper from "../../c2/wrapper";
 import { formatDate } from "../../helper/formatDate";
-import { getBlogSlug, getBlogs } from "../../lib/blog"
-import { IBlogs } from "../../type/blog"
+import { getBlogSlug, getBlogs } from "../../lib/blog";
+import { IBlogs } from "../../type/blog";
 import { Options, documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import Link from "next/link";
+import Image from 'next/image'; 
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
 export const generateStaticParams = async () => {
-    const users = await getBlogs()
+    const users = await getBlogs();
 
     return users.map((blog: IBlogs) => ({
         params: {
             slug: blog.fields.slug
         }
-    }))
-}
+    }));
+};
 
 export async function generateMetadata({ params }: { params: { slug: string }}) {
-    const blog = await getBlogSlug(params.slug)
+    const blog = await getBlogSlug(params.slug);
 
     return {
         title: blog.fields.title,
@@ -29,12 +30,12 @@ export async function generateMetadata({ params }: { params: { slug: string }}) 
         openGraph: {
             images: [`https:${blog.fields.image.fields.file.url}`, `https:${blog.fields.author.fields.avatar.fields.file.url}`],
         },
-    }
+    };
 }
 
 export default async function BlogDetail({ params }: { params: { slug: string }}) {
-    const blog = await getBlogSlug(params.slug)
-    
+    const blog = await getBlogSlug(params.slug);
+
     const options: Options = {
         renderNode: {
             [BLOCKS.HEADING_1]: (_node, children) => <h1 className="my-[2.5px] md:text-3xl sm:text-2xl text-xl">{children}</h1>,
@@ -48,7 +49,7 @@ export default async function BlogDetail({ params }: { params: { slug: string }}
             [BLOCKS.LIST_ITEM]: (_node, children) => <li className="my-2">{children}</li>,
         },
     };
-    
+
     return (
         <Wrapper>
             <div className="flex">
@@ -62,17 +63,24 @@ export default async function BlogDetail({ params }: { params: { slug: string }}
                     <ShareButton slug={blog.fields.slug} className="mt-5"/>
                 </div>
                 <div className="flex-[2] pr-52 max-lg:pr-0">
-                    <h5 className="mb-2 text-[32px] max-md:text-[24px] font-bold  text-gray-900">{blog.fields.title}</h5>
+                    <h5 className="mb-2 text-[32px] max-md:text-[24px] font-bold text-gray-900">{blog.fields.title}</h5>
                     <div className="flex gap-1">
                         <p className="font-bold text-[18px] max-md:text-[14px]">{blog.fields.author.fields.name}</p>
                         ∙
                         <p className="text-[18px] max-md:text-[14px]">{formatDate(blog.fields.date)}</p>
                     </div>
                     <ShareButton slug={blog.fields.slug} className="hidden max-md:block" />
-                    <img className="w-full my-5 shadow" src={`https:${blog.fields.image.fields.file.url}`} alt={blog.fields.title} />
+                    <Image
+                      className="w-full my-5 shadow"
+                      src={`https:${blog.fields.image.fields.file.url}`}
+                      alt={blog.fields.title}
+                      width={800}  // Ganti dengan lebar gambar yang sesuai
+                      height={600} // Ganti dengan tinggi gambar yang sesuai
+                      layout="responsive"
+                    />
                     {documentToReactComponents(blog.fields.content, options)}
                 </div>
             </div>
         </Wrapper>
-    )
+    );
 }

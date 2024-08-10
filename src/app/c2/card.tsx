@@ -1,25 +1,41 @@
-import Image from "next/image"
-import { splitStr } from "../helper/splitStr"
-import Link from "next/link"
+import Image from "next/image";
+import { splitStr } from "../helper/splitStr";
+import Link from "next/link";
 
 interface ICardBlog {
-    title: string
-    image: string
-    avatar: string
-    email: string
-    author: string
-    slug: string
+    title: string;
+    image: string;
+    avatar: string;
+    email: string;
+    author: string;
+    slug: string;
 }
 
 export const CardBlog: React.FC<ICardBlog> = ({ title, image, avatar, email, author, slug }) => {
     return (
         <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <img className="rounded-t-lg h-[200px] w-full " src={`https:${image}`} alt={title} />
+          <div className="relative h-[200px] w-full">
+            <Image
+              src={`https:${image}`}
+              alt={title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-lg"
+            />
+          </div>
           <div className="p-4">
               <h5 className="mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">{splitStr(title, 50)}</h5>
               <div className="flex items-center my-5">
                     <div className="flex-shrink-0">
-                        <img className="w-10 h-10 rounded-full" src={`https:${avatar}`} alt="Neil image" />
+                        <div className="relative w-10 h-10">
+                          <Image
+                            src={`https:${avatar}`}
+                            alt="Avatar"
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded-full"
+                          />
+                        </div>
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -38,5 +54,5 @@ export const CardBlog: React.FC<ICardBlog> = ({ title, image, avatar, email, aut
               </Link>
           </div>
       </div>
-    )
+    );
 }

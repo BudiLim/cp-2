@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 type User = {
   name: {
@@ -37,10 +38,12 @@ const Teams = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {teamMembers.map((user, index) => (
           <div key={index} className="bg-slate-100 p-4 rounded-lg shadow-md">
-            <img
+            <Image
               src={user.picture.large}
               alt={`${user.name.first} ${user.name.last}`}
               className="w-32 h-32 object-cover rounded-full mx-auto"
+              width={128} // Width in pixels
+              height={128} // Height in pixels
             />
             <h2 className="text-xl font-semibold mt-4 text-center">{`${user.name.first} ${user.name.last}`}</h2>
             <p className="text-center">{user.email}</p>
