@@ -11,7 +11,6 @@ export default function Home() {
       <Section/>
       <Products/>
       <Testimoni/>
-   
     </main>
   );
 }

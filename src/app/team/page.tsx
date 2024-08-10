@@ -42,8 +42,8 @@ const Teams = () => {
               src={user.picture.large}
               alt={`${user.name.first} ${user.name.last}`}
               className="w-32 h-32 object-cover rounded-full mx-auto"
-              width={128} // Width in pixels
-              height={128} // Height in pixels
+              width={128} 
+              height={128} 
             />
             <h2 className="text-xl font-semibold mt-4 text-center">{`${user.name.first} ${user.name.last}`}</h2>
             <p className="text-center">{user.email}</p>

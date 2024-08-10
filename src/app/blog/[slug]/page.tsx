@@ -74,8 +74,8 @@ export default async function BlogDetail({ params }: { params: { slug: string }}
                       className="w-full my-5 shadow"
                       src={`https:${blog.fields.image.fields.file.url}`}
                       alt={blog.fields.title}
-                      width={800}  // Ganti dengan lebar gambar yang sesuai
-                      height={600} // Ganti dengan tinggi gambar yang sesuai
+                      width={800}  
+                      height={600} 
                       layout="responsive"
                     />
                     {documentToReactComponents(blog.fields.content, options)}
