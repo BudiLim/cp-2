@@ -11,21 +11,21 @@ const products = [
     name: 'Nike Air Max',
     description: 'Comfortable and stylish sneakers for everyday wear.',
     image: one,
-    url: "/service/1",
+    url: "/product/1",
   },
   {
     id: 2,
     name: 'Nike Dri-FIT Shirt',
     description: 'Breathable and moisture-wicking shirt for optimal performance.',
     image: two,
-    url: "/service/2",
+    url: "/product/2",
   },
   {
     id: 2,
     name: 'Nike Dri-FIT Shirt',
     description: 'Breathable and moisture-wicking shirt for optimal performance.',
     image: three,
-    url: "/service/3",
+    url: "/product/3",
   },
 ];
 
