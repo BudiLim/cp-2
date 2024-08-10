@@ -1,4 +1,3 @@
-import Footer from "./component/Footer";
 import Hero from "./component/Hero";
 import Products from "./component/Product";
 import Section from "./component/Section";
